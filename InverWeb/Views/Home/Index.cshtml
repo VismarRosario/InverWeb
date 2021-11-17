@@ -1,0 +1,97 @@
+﻿@model LoginViewModel
+
+@{ 
+    ViewData["Title"] = "Ingreso";
+    bool HayErrores = !string.IsNullOrEmpty(ViewData["Error"]?.ToString()); 
+}
+
+@if (HayErrores)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-times-circle"></i></div>
+        <strong>@ViewData["Error"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div id="login-form">
+    <div class="accordion" id="loggin-accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <span class="accordion-button @(HayErrores ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="#login-form-body"
+                      aria-expanded="true" aria-controls="login-form-body">
+                    Ingresar al sistema
+                </span>
+            </h2>
+
+            <div id="login-form-body" class="accordion-collapse collapse  @(HayErrores ? "show" : "")" aria-labelledby="headingOne" data-bs-parent="#loggin-accordion">
+                <div class="accordion-body">
+                    <form action="/Account/Login" method="POST" novalidate>
+                        <div class="input-group">
+                            <label for="Correo" class="input-group-text"><i class="fa fa-envelope"></i></label>
+                            <input type="email" class="form-control" placeholder="Su Correo" asp-for="Correo">
+                            @Html.ValidationMessageFor(m => m.Correo, null, new { @class = "text-danger w-100" })
+                        </div>
+
+                        <div class="input-group">
+                            <label for="Clave" class="input-group-text"><i class="fa fa-key"></i></label>
+                            <input type="password" class="form-control" placeholder="Colocar Contrasea" asp-for="Clave">
+                            @Html.ValidationMessageFor(m => m.Clave, null, new { @class = "text-danger w-100" })
+                        </div>
+                        <div class="input-group flex-nowrap">
+                            <input type="submit" value="Ingresar" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div><!-- accordion-body -->
+            </div>
+        </div><!-- accordion-item -->
+    </div><!-- accordion -->
+</div><!-- login-form -->
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            AutoHideAlerts();
+
+            $(document).on('focusout', 'form', ValidationClassesToggle);
+            $(document).on('focusin', 'form', ValidationClassesToggle);
+            $(document).on('keypress', 'form', ValidationClassesToggle);
+        });
+
+        function ValidationClassesToggle() {
+            $('input.valid').parents('.input-group').removeClass('input-validation-error').addClass('valid');
+            $('input.input-validation-error').parents('.input-group').removeClass('valid').addClass('input-validation-error');
+        }
+
+        let ErrorMessageNotHovered = true;
+
+        function AutoHideAlerts() {
+            window.setTimeout(function () {
+                if (ErrorMessageNotHovered) {
+                    $(".alert").fadeOut(800, function () {
+                        $(this).remove();
+                    });
+                }
+            }, 5000);
+
+            $(".alert").on('click', '.close-button', function () {
+                $(this).parents('#alert-box').remove();
+            });
+
+            $(".alert").mouseenter(function () {
+                ErrorMessageNotHovered = false;
+            });
+
+            $(".alert").mouseleave(function () {
+                ErrorMessageNotHovered = true;
+                window.setTimeout(function () {
+                    if (ErrorMessageNotHovered) {
+                        $(".alert").fadeOut(800, function () {
+                            $(this).remove();
+                        });
+                    }
+                }, 2000);
+            });
+        }
+    </script>
+}

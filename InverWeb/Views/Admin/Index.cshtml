@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Panel Administrativo";
+    ViewData["MenuPrincipal-Admin"] = "active";
+
+    bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
+}
+
+@if (MensajeValido)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-check"></i></div>
+        <strong>@ViewData["Success"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<main>
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-home d-lg-none"></i> Informaciones diarias</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-muted">No hay informaciones para mostrar en este momento</h2>
+            </div>
+        </div>
+    </div>
+</main>

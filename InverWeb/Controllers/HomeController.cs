@@ -30,7 +30,7 @@ namespace InverWeb.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("Account/Login")]
+        [HttpPost("Account/Login")]
         public IActionResult Login(LoginViewModel modelo)
         {
             //Validar si los datos del modelo cumplen
@@ -92,6 +92,14 @@ namespace InverWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dbcontext.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

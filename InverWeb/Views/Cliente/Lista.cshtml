@@ -1,0 +1,101 @@
+﻿@model IEnumerable<InverWeb.DataAccess.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Clientes - Administración";
+    ViewData["MenuPrincipal-Cliente"] = "active";
+
+    bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
+    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
+}
+
+@if (MensajeValido)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-check"></i></div>
+        <strong>@TempData["Success"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (HayErrores)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-times-circle"></i></div>
+        <strong>@TempData["Error"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<main>
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Clientes</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Clientes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body-actions">
+                            <form asp-controller="Cliente" asp-action="Lista" method="GET" novalidate>
+                                <div class="row mb-3">
+                                    <div class="col-8 col-lg-4">
+                                        <input type="search" class="form-control" placeholder="Buscar" name="Filtro" id="Filtro" value="@ViewData["Filtro"]" />
+                                    </div>
+                                    <div class="col-4 col-lg-2">
+                                        <input type="submit" class="btn btn-primary w-100" value="Filtrar" />
+                                    </div>
+                                    <div class="d-none d-lg-flex col-lg-3 offset-lg-3">
+                                        <a asp-controller="Cliente" asp-action="Nuevo" class="btn btn-outline-success w-100">
+                                            <i class="fa fa-user-plus"></i> Nuevo Cliente
+                                        </a>
+                                    </div>
+                                    <div class="col-6 offset-3 d-lg-none mt-3">
+                                        <a asp-controller="Cliente" asp-action="Nuevo" class="btn btn-outline-success w-100">
+                                            <i class="fa fa-user-plus"></i> Nuevo Cliente
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-users">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 280px">Nombre</th>
+                                        <th class="d-none d-lg-table-cell" style="min-width: 200px">Correo</th>
+                                        <th class="d-none d-lg-table-cell" style="min-width: 150px">Celular</th>
+                                        <th style="min-width: 140px">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (InverWeb.DataAccess.Models.Usuario cliente in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <b>@cliente.Nombres</b>
+                                                <label class="d-block d-lg-none">@cliente.Correo</label>
+                                                <label class="d-block d-lg-none">@cliente.Celular</label>
+                                            </td>
+                                            <td class="d-none d-lg-table-cell">@cliente.Correo</td>
+                                            <td class="d-none d-lg-table-cell">@cliente.Celular</td>
+                                            <td>
+                                                <a asp-controller="Cliente" asp-action="Mostrar" asp-route-ID="@cliente.ID" asp-route-Correo="@cliente.Correo"><i class="my-icon fa fa-eye"></i></a>
+                                                <a asp-controller="Cliente" asp-action="Modificar" asp-route-ID="@cliente.ID" asp-route-Correo="@cliente.Correo"><i class="my-icon fa fa-edit"></i></a>
+                                                <a asp-controller="Cliente" asp-action="Eliminar" asp-route-ID="@cliente.ID"><i class="my-icon fa fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /body -->
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- container -->
+</main>
+

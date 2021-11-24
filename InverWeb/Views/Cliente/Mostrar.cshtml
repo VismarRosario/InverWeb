@@ -1,0 +1,139 @@
+﻿@model ClienteViewModel
+
+@{
+    ViewData["Title"] = "Clientes - Administración";
+    ViewData["MenuPrincipal-Cliente"] = "active";
+
+    bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
+    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
+}
+
+@if (MensajeValido)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-check"></i></div>
+        <strong>@TempData["Success"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (HayErrores)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div><i class="fa fa-times-circle"></i></div>
+        <strong>@TempData["Error"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<main>
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Clientes</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Información de Cliente</h5>
+                    </div>
+                    <form action="#" method="GET">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Nombres" class="form-label mb-0">Nombres</label>
+                                        <input type="text" class="form-control" placeholder="Personal ID" value="@Model.Nombres" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Correo" class="form-label mb-0">Correo</label>
+                                        <input type="text" class="form-control" placeholder="Correo electrónico" value="@Model.Correo" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Cedula" class="form-label mb-0">Cédula</label>
+                                        <input type="text" class="form-control" placeholder="00100000001" value="@Model.Cedula" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Celular" class="form-label mb-0">Celular / Whatsapp</label>
+                                        <input type="text" class="form-control" placeholder="WhatsApp" value="@Model.Celular" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12">
+                                    <div class="form-group mb-2">
+                                        <label for="Direccion" class="form-label mb-0">Dirección</label>
+                                        <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" value="@Model.Direccion" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <hr class="mt-3" />
+
+                                <div class="col-12">
+                                    <div class="form-group mb-2">
+                                        <h3 class="text-muted">Datos de Empleo</h3>
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="EmpresaNombre" class="form-label mb-0">Nombre de la Empresa</label>
+                                        <input type="text" class="form-control" placeholder="Empresa, SRL" value="@Model.EmpresaNombre" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="EmpresaTelefono" class="form-label mb-0">Teléfono</label>
+                                        <input type="text" class="form-control" placeholder="8090090909" value="@Model.EmpresaTelefono" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="EmpresaCargo" class="form-label mb-0">Cargo</label>
+                                        <input type="text" class="form-control" placeholder="WhatsApp" value="@Model.EmpresaCargo" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="EmpresaSalario" class="form-label mb-0">Salario</label>
+                                        <input type="text" class="form-control" placeholder="Correo electrónico" value="@Model.EmpresaSalario.ToString("N2")" disabled />
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12">
+                                    <div class="form-group mb-2">
+                                        <label for="EmpresaDireccion" class="form-label mb-0">Dirección de la Empresa</label>
+                                        <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" value="@Model.EmpresaDireccion" disabled />
+                                    </div>
+                                </div><!-- /col -->
+                            </div><!-- /row -->
+                        </div><!-- /body -->
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-4 col-xxl-3">
+                                    <a asp-controller="Cliente" asp-action="Lista" class="btn btn-secondary w-100"
+                                       data-bs-dismiss="modal">Atrás</a>
+                                </div>
+                            </div><!-- /row -->
+                        </div>
+                    </form><!-- /form -->
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- container -->
+</main>
+
+

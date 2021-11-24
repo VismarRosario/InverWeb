@@ -44,7 +44,7 @@ namespace InverWeb.Controllers
                 if (login == null)
                 {
                     // Devolver error si no cumplen los datos del modelo
-                    ViewData["Error"] = "Error de usuario y/o contraseña";
+                    TempData["Error"] = "Error de usuario y/o contraseña";
                     return View("Index", modelo);
                 }
 
@@ -65,13 +65,13 @@ namespace InverWeb.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                     // Crear mensaje de bienvenida y redireccionar al panel de administración
-                    TempData["Success"] = $"Bienvenid@ al Sistema \n {login.Nombres}";
+                    TempData["Success"] = $"Bienvenid@ al Sistema, \n {login.Nombres}";
                     return RedirectToAction("Index", "Admin");
                 }
             }
 
             // Devolver error si no cumplen los datos del modelo
-            ViewData["Error"] = "Error de usuario y/o contraseña";
+            TempData["Error"] = "Error de usuario y/o contraseña";
             return View("Index", modelo);
         }
 

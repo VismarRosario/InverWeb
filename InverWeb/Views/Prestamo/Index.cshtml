@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Panel Administrativo";
+    ViewData["MenuPrincipal-Prestamo"] = "active";
+}
+
+<main>
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-hand-holding-usd d-lg-none"></i> Préstamos</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Clientes con préstamos activos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="card-body-actions">
+                                <form action="#" method="get">
+                                    <div class="row mb-4 pl-1">
+                                        <div class="col-8 col-lg-3">
+                                            <input type="search" class="form-control" placeholder="Buscar" />
+                                        </div>
+                                        <div class="col-4 col-lg-2">
+                                            <input type="submit" class="btn btn-primary w-100" value="Filtrar" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <a asp-controller="Prestamo" asp-action="Mostrar" class="clear">
+                                        <div class="loan">
+                                            <div class="row">
+                                                <div class="col-12 loan-customer">Nombre del Cliente</div>
+                                                <div class="col-5 loan-info">
+                                                    <label for="" class="text-white">Monto Original</label>
+                                                    <div class="loan-info-amount">50,0000.00</div>
+                                                    <div class="loan-info-date">2019-01-01</div>
+                                                </div>
+                                                <div class="col-7 loan-detail">
+                                                    <div class="loan-detail-remaining"><label style="width: 110px;">Restante: </label>$23,250.00</div>
+                                                    <div class="loan-detail-dues"><label style="width: 110px;">Cuotas: </label>12 / 48</div>
+                                                    <div class="loan-detail-due"><label style="width: 110px;">Monto Cuota: </label>1,580.95</div>
+                                                </div>
+                                            </div><!-- /row -->
+                                        </div><!-- loan -->
+                                    </a>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-lg-6">
+                                    <a asp-controller="Prestamo" asp-action="Mostrar" class="clear">
+                                        <div class="loan">
+                                            <div class="row">
+                                                <div class="col-12 loan-customer">Nombre del Cliente</div>
+                                                <div class="col-5 loan-info">
+                                                    <label for="" class="text-white">Monto Original</label>
+                                                    <div class="loan-info-amount">1,550,0000.00</div>
+                                                    <div class="loan-info-date">2019-01-01</div>
+                                                </div>
+                                                <div class="col-7 loan-detail">
+                                                    <div class="loan-detail-remaining"><label style="width: 110px;">Restante: </label>$23,250.00</div>
+                                                    <div class="loan-detail-dues"><label style="width: 110px;">Cuotas: </label>12 / 48</div>
+                                                    <div class="loan-detail-due"><label style="width: 110px;">Monto Cuota: </label>1,580.95</div>
+                                                </div>
+                                            </div><!-- /row -->
+                                        </div><!-- loan -->
+                                    </a>
+                                </div><!-- /col -->
+                            </div><!-- /row -->
+                        </div>
+                    </div>
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- container -->
+    </div>
+</main>

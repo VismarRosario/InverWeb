@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Panel Administrativo";
+    ViewData["MenuPrincipal-Prestamo"] = "active";
+}
+
+<main>
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-hand-holding-usd d-lg-none"></i> Préstamos</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Detalle de préstamo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body-actions">
+                            <form action="#" method="get">
+                                <div class="row pl-1">
+                                    <div class="col-4 col-lg-2">
+                                        <a asp-controller="Prestamo" asp-action="Index" class="btn btn-secondary w-100">Volver</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="amortization">
+                                        <div class="customer row mb-2">
+                                            <div class="col-12 col-lg-8 offset-lg-2 bg-black-cristal py-3">
+                                                <div class="customer-name">Nombre del Cliente</div>
+                                                <div class="customer-address">En la casa #, calle, ciudad, provincia</div>
+                                            </div><!-- /col -->
+                                            <div class="col-12 col-lg-4 offset-lg-2 bg-black-cristal py-1">
+                                                <div class="customer-info"><b>Próximo Pago:</b> 2021-01-01</div>
+                                                <div class="customer-info"><b>Tasa Interés:</b> 24%</div>
+                                                <div class="customer-info"><b>Email:</b> cliente@cliente.com</div>
+                                                <div class="customer-info"><b>Celular:</b> (809) 809-8099</div>
+                                                <div class="customer-info"><b>Fecha Inicial:</b> 2019-01-01</div>
+                                            </div>
+                                            <div class="col-12 col-lg-4 bg-black-cristal py-2">
+                                                <div class="customer-info"><b>Monto Cuota:</b> $2,350.95</div>
+                                                <div class="customer-info"><b>Monto Inicial:</b> 950,000.00</div>
+                                                <div class="customer-info"><b>Monto Restante:</b> 720,580.15</div>
+                                                <div class="customer-info"><b>Cuotas:</b> 18 / 48</div>
+                                                <div class="customer-info"><b>Fecha Final:</b> 2023-01-01</div>
+                                            </div>
+                                        </div><!-- customer -->
+                                        <div class="amortization-table">
+                                            <table class="row">
+                                                <tbody class="col-12 col-lg-8 offset-lg-2">
+                                                    <tr class="row m-0 title">
+                                                        <th class="col-2">#</th>
+                                                        <th class="col-3 p-0">Fecha</th>
+                                                        <th class="col-3 p-0">Cuota</th>
+                                                        <th class="col-4 p-0">Nuevo Capital</th>
+                                                    </tr>
+                                                    <tr class="row m-0">
+                                                        <td class="col-2">1</td>
+                                                        <td class="col-3 p-0">2021-01-01</td>
+                                                        <td class="col-3 p-0">$2,000.00</td>
+                                                        <td class="col-4 p-0">$100,500.00</td>
+                                                    </tr>
+                                                    <tr class="row m-0">
+                                                        <td class="col-2">2</td>
+                                                        <td class="col-3 p-0">2021-01-01</td>
+                                                        <td class="col-3 p-0">$2,000.00</td>
+                                                        <td class="col-4 p-0">$100,500.00</td>
+                                                    </tr>
+                                                    <tr class="row m-0">
+                                                        <td class="col-2">3</td>
+                                                        <td class="col-3 p-0">2021-01-01</td>
+                                                        <td class="col-3 p-0">$2,000.00</td>
+                                                        <td class="col-4 p-0">$100,500.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div><!-- amortization -->
+                                </div><!-- /col -->
+                            </div><!-- /row -->
+                        </div>
+                    </div>
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- container -->
+    </div>
+</main>
+

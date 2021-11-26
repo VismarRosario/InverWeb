@@ -288,7 +288,6 @@ namespace InverWeb.Controllers
             return RedirectToAction(nameof(Lista));
         }
 
-
         private bool UsuarioExiste(string Correo, string Cedula, int ID = 0)
         {
             // Crear consulta de usuario con cedula y correo

@@ -1,0 +1,167 @@
+﻿@model SuperAdminViewModel
+
+@{
+    ViewData["Title"] = "SuperAdmin - Administración";
+    ViewData["MenuPrincipal-SuperAdmin"] = "active";
+
+    bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
+    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
+
+}
+
+<main>
+    @if (MensajeValido)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div><i class="fa fa-check"></i></div>
+            <strong>@TempData["Success"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (HayErrores)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div><i class="fa fa-check"></i></div>
+            <strong>@TempData["Error"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="container">
+        <div id="title-bar">
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Administradores</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Nuevo SuperAdmin</h5>
+                    </div>
+                    <form asp-controller="SuperAdmin" asp-action="Nuevo" method="POST" novalidate>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Nombres" class="form-label mb-0">Nombres</label>
+                                        <input type="text" class="form-control" placeholder="Nombre completo" asp-for="Nombres" required />
+                                        @Html.ValidationMessageFor(m => m.Nombres, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Correo" class="form-label mb-0">Correo</label>
+                                        <input type="email" class="form-control" placeholder="Correo electrónico" asp-for="Correo" required />
+                                        @Html.ValidationMessageFor(m => m.Correo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Cedula" class="form-label mb-0">Cédula</label>
+                                        <input type="number" class="form-control" placeholder="00100000001" asp-for="Cedula" required />
+                                        @Html.ValidationMessageFor(m => m.Cedula, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Celular" class="form-label mb-0">Celular / Whatsapp</label>
+                                        <input type="tel" class="form-control" placeholder="WhatsApp" asp-for="Celular" required />
+                                        @Html.ValidationMessageFor(m => m.Celular, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Clave" class="form-label mb-0">Nueva Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="Clave" required />
+                                        @Html.ValidationMessageFor(m => m.Clave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="RepetirClave" class="form-label mb-0">Repetir Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="RepetirClave" required />
+                                        @Html.ValidationMessageFor(m => m.RepetirClave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12">
+                                    <div class="form-group mb-2">
+                                        <label for="Direccion" class="form-label mb-0">Dirección</label>
+                                        <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" asp-for="Direccion" required />
+                                        @Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+                            </div><!-- /row -->
+                        </div><!-- /body -->
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-4 offset-3 col-md-3 offset-md-5">
+                                    <a asp-controller="SuperAdmin" asp-action="Lista" class="btn btn-secondary w-100"
+                                       data-bs-dismiss="modal">Atrás</a>
+                                </div>
+                                <div class="col-5 col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                                </div>
+                            </div><!-- /row -->
+                        </div>
+                    </form><!-- /form -->
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- /row -->
+    </div><!-- container -->
+</main>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            AutoHideAlerts();
+
+            $(document).on('focusout', 'form', ValidationClassesToggle);
+            $(document).on('focusin', 'form', ValidationClassesToggle);
+            $(document).on('keypress', 'form', ValidationClassesToggle);
+        });
+
+        function ValidationClassesToggle() {
+            $('input.valid').parents('.form-group').removeClass('input-validation-error').addClass('valid');
+            $('input.input-validation-error').parents('.form-group').removeClass('valid').addClass('input-validation-error');
+        }
+
+        let ErrorMessageNotHovered = true;
+
+        function AutoHideAlerts() {
+            window.setTimeout(function () {
+                if (ErrorMessageNotHovered) {
+                    $(".alert").fadeOut(800, function () {
+                        $(this).remove();
+                    });
+                }
+            }, 5000);
+
+            $(".alert").on('click', '.close-button', function () {
+                $(this).parents('#alert-box').remove();
+            });
+
+            $(".alert").mouseenter(function () {
+                ErrorMessageNotHovered = false;
+            });
+
+            $(".alert").mouseleave(function () {
+                ErrorMessageNotHovered = true;
+                window.setTimeout(function () {
+                    if (ErrorMessageNotHovered) {
+                        $(".alert").fadeOut(800, function () {
+                            $(this).remove();
+                        });
+                    }
+                }, 2000);
+            });
+        }
+    </script>
+}
+

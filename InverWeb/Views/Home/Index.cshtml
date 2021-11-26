@@ -1,8 +1,8 @@
 ﻿@model LoginViewModel
 
-@{ 
+@{
     ViewData["Title"] = "Ingreso";
-    bool HayErrores = !string.IsNullOrEmpty(ViewData["Error"]?.ToString()); 
+    bool HayErrores = !string.IsNullOrEmpty(ViewData["Error"]?.ToString());
 }
 
 @if (HayErrores)
@@ -13,6 +13,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
+<div id="login-form-bg">
+    <img src="~/images/login-bg.jpeg" alt="bg" width="auto" height="auto">
+</div>
 
 <div id="login-form">
     <div class="accordion" id="loggin-accordion">

@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Clientes - Administración";
-    ViewData["MenuPrincipal-Cliente"] = "active";
+﻿@model NuevaClaveViewModel
+
+@{                                                                
+    ViewData["Title"] = "SuperAdmin - Administración";
+    ViewData["MenuPrincipal-SuperAdmin"] = "active";
 
     bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
     bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
@@ -18,7 +20,7 @@
 @if (HayErrores)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div><i class="fa fa-times-circle"></i></div>
+        <div><i class="fa fa-check"></i></div>
         <strong>@TempData["Error"]</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -27,18 +29,16 @@
 <main>
     <div class="container">
         <div id="title-bar">
-            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Clientes</h1>
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Administradores</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Eliminar Cliente</h5>
+                        <h5 class="card-title">Cambio de Clave</h5>
                     </div>
-                    <form asp-controller="Cliente" asp-action="Eliminar" method="POST" novalidate>
+                    <form asp-controller="SuperAdmin" asp-action="CambiarClave" method="POST" novalidate>
                         <div class="card-body">
-
-                            <h5 class="mb-3">¿Seguro que desea Eliminar este cliente de manera Permanente?</h5>
 
                             <div class="row">
                                 <div class="col-12 col-md-6">
@@ -68,6 +68,22 @@
                                         <input type="text" class="form-control" placeholder="WhatsApp" value="@ViewData["Celular"]" disabled />
                                     </div>
                                 </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Clave" class="form-label mb-0">Nueva Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="Clave" required />
+                                        @Html.ValidationMessageFor(m => m.Clave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="RepetirClave" class="form-label mb-0">Repetir Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="RepetirClave" required />
+                                        @Html.ValidationMessageFor(m => m.RepetirClave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
                             </div><!-- /row -->
                         </div><!-- /body -->
 
@@ -77,11 +93,11 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-4 offset-3 col-md-3 offset-md-5">
-                                    <a asp-controller="Cliente" asp-action="Lista" class="btn btn-secondary w-100"
+                                    <a asp-controller="SuperAdmin" asp-action="Lista" class="btn btn-secondary w-100"
                                        data-bs-dismiss="modal">Atrás</a>
                                 </div>
                                 <div class="col-5 col-md-4">
-                                    <button type="submit" class="btn btn-danger w-100">Eliminar</button>
+                                    <button type="submit" class="btn btn-primary w-100">Cambiar clave</button>
                                 </div>
                             </div><!-- /row -->
                         </div>

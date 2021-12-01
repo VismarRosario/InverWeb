@@ -1,7 +1,8 @@
-﻿@model SuperAdminViewModel
+﻿@model CobradorViewModel
+
 @{ 
-    ViewData["Title"] = "SuperAdmin - Administración";
-    ViewData["MenuPrincipal-SuperAdmin"] = "active";
+    ViewData["Title"] = "Cobradores - Administración";
+    ViewData["MenuPrincipal-Cobrador"] = "active";
 
     bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
     bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString()); 
@@ -28,13 +29,13 @@
 <main>
     <div class="container">
         <div id="title-bar">
-            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Administradores</h1>
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Cobrador</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Información de SuperAdmin</h5>
+                        <h5 class="card-title">Información de Cobrador</h5>
                     </div>
                     <form action="#" method="GET">
                         <div class="card-body">
@@ -79,7 +80,7 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-4 col-xxl-3">
-                                    <a asp-controller="SuperAdmin" asp-action="Lista" class="btn btn-secondary w-100"
+                                    <a asp-controller="Cobrador" asp-action="Lista" class="btn btn-secondary w-100"
                                        data-bs-dismiss="modal">Atrás</a>
                                 </div>
                             </div><!-- /row -->
@@ -90,4 +91,3 @@
         </div><!-- /row -->
     </div><!-- container -->
 </main>
-

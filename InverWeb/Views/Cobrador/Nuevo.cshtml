@@ -1,43 +1,44 @@
-﻿@model ClienteViewModel
+﻿@model CobradorViewModel
 
 @{
-    ViewData["Title"] = "Clientes - Administración";
-    ViewData["MenuPrincipal-Cliente"] = "active";
+    ViewData["Title"] = "Cobradores - Administración";
+    ViewData["MenuPrincipal-Cobrador"] = "active";
 
     bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
     bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
-}
 
-@if (MensajeValido)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div><i class="fa fa-check"></i></div>
-        <strong>@TempData["Success"]</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-
-@if (HayErrores)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <div><i class="fa fa-check"></i></div>
-        <strong>@TempData["Error"]</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
 }
 
 <main>
+    @if (MensajeValido)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div><i class="fa fa-check"></i></div>
+            <strong>@TempData["Success"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (HayErrores)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div><i class="fa fa-check"></i></div>
+            <strong>@TempData["Error"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <div class="container">
         <div id="title-bar">
-            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Clientes</h1>
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Cobradores</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 col-xl-7">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Modificar Cliente</h5>
+                        <h5 class="card-title">Nuevo Cobrador</h5>
                     </div>
-                    <form asp-controller="Cliente" asp-action="Modificar" method="POST" novalidate>
+                    <form asp-controller="Cobrador" asp-action="Nuevo" method="POST" novalidate>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-6">
@@ -45,7 +46,6 @@
                                         <label for="Nombres" class="form-label mb-0">Nombres</label>
                                         <input type="text" class="form-control" placeholder="Nombre completo" asp-for="Nombres" required />
                                         @Html.ValidationMessageFor(m => m.Nombres, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(m => m.ID)
                                     </div>
                                 </div><!-- /col -->
 
@@ -73,59 +73,27 @@
                                     </div>
                                 </div><!-- /col -->
 
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Clave" class="form-label mb-0">Nueva Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="Clave" required />
+                                        @Html.ValidationMessageFor(m => m.Clave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="RepetirClave" class="form-label mb-0">Repetir Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="RepetirClave" required />
+                                        @Html.ValidationMessageFor(m => m.RepetirClave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
                                 <div class="col-12">
                                     <div class="form-group mb-2">
                                         <label for="Direccion" class="form-label mb-0">Dirección</label>
                                         <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" asp-for="Direccion" required />
                                         @Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger" })
-                                    </div>
-                                </div><!-- /col -->
-
-                                <hr class="mt-3" />
-
-                                <div class="col-12">
-                                    <div class="form-group mb-2">
-                                        <h3 class="text-muted">Datos de Empleo</h3>
-                                    </div>
-                                </div><!-- /col -->
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="EmpresaNombre" class="form-label mb-0">Nombre de la Empresa</label>
-                                        <input type="text" class="form-control" placeholder="Empresa, SRL" asp-for="EmpresaNombre" required />
-                                        @Html.ValidationMessageFor(m => m.EmpresaNombre, "", new { @class = "text-danger" })
-                                    </div>
-                                </div><!-- /col -->
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="EmpresaTelefono" class="form-label mb-0">Teléfono</label>
-                                        <input type="tel" class="form-control" placeholder="8090090909" asp-for="EmpresaTelefono" required />
-                                        @Html.ValidationMessageFor(m => m.EmpresaTelefono, "", new { @class = "text-danger" })
-                                    </div>
-                                </div><!-- /col -->
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="EmpresaCargo" class="form-label mb-0">Cargo</label>
-                                        <input type="text" class="form-control" placeholder="Posición en empresa" asp-for="EmpresaCargo" required />
-                                        @Html.ValidationMessageFor(m => m.EmpresaCargo, "", new { @class = "text-danger" })
-                                    </div>
-                                </div><!-- /col -->
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="EmpresaSalario" class="form-label mb-0">Salario</label>
-                                        <input type="number" class="form-control" placeholder="Correo electrónico" asp-for="EmpresaSalario" required />
-                                        @Html.ValidationMessageFor(m => m.EmpresaSalario, "", new { @class = "text-danger" })
-                                    </div>
-                                </div><!-- /col -->
-
-                                <div class="col-12">
-                                    <div class="form-group mb-2">
-                                        <label for="EmpresaDireccion" class="form-label mb-0">Dirección de la Empresa</label>
-                                        <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" asp-for="EmpresaDireccion" required />
-                                        @Html.ValidationMessageFor(m => m.EmpresaDireccion, "", new { @class = "text-danger" })
                                     </div>
                                 </div><!-- /col -->
                             </div><!-- /row -->
@@ -134,11 +102,11 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-4 offset-3 col-md-3 offset-md-5">
-                                    <a asp-controller="Cliente" asp-action="Lista" class="btn btn-secondary w-100"
+                                    <a asp-controller="Cobrador" asp-action="Lista" class="btn btn-secondary w-100"
                                        data-bs-dismiss="modal">Atrás</a>
                                 </div>
                                 <div class="col-5 col-md-4">
-                                    <button type="submit" class="btn btn-primary w-100">Modificar</button>
+                                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
                                 </div>
                             </div><!-- /row -->
                         </div>
@@ -196,5 +164,3 @@
         }
     </script>
 }
-
-

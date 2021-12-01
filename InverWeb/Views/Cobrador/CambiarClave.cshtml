@@ -1,10 +1,11 @@
-﻿@model SuperAdminViewModel
-@{ 
-    ViewData["Title"] = "SuperAdmin - Administración";
-    ViewData["MenuPrincipal-SuperAdmin"] = "active";
+﻿@model NuevaClaveViewModel
+
+@{
+    ViewData["Title"] = "Cobradores - Administración";
+    ViewData["MenuPrincipal-Cobrador"] = "active";
 
     bool MensajeValido = !string.IsNullOrEmpty(TempData["Success"]?.ToString());
-    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString()); 
+    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
 }
 
 @if (MensajeValido)
@@ -17,7 +18,7 @@
 }
 
 @if (HayErrores)
-{
+    {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <div><i class="fa fa-check"></i></div>
         <strong>@TempData["Error"]</strong>
@@ -28,59 +29,75 @@
 <main>
     <div class="container">
         <div id="title-bar">
-            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Administradores</h1>
+            <h1><i class="fa fa-user-secret d-lg-none"></i> Mantenimiento de Cobradores</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8 col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Información de SuperAdmin</h5>
+                        <h5 class="card-title">Cambio de Clave</h5>
                     </div>
-                    <form action="#" method="GET">
+                    <form asp-controller="Cobrador" asp-action="CambiarClave" method="POST" novalidate>
                         <div class="card-body">
+
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="Nombres" class="form-label mb-0">Nombres</label>
-                                        <input type="text" class="form-control" placeholder="Personal ID" value="@Model.Nombres" disabled />
+                                        <input type="text" class="form-control" placeholder="Personal ID" value="@ViewData["Nombres"]" disabled />
                                     </div>
                                 </div><!-- /col -->
 
                                 <div class="col-12 col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="Correo" class="form-label mb-0">Correo</label>
-                                        <input type="text" class="form-control" placeholder="Correo electrónico" value="@Model.Correo" disabled />
+                                        <input type="text" class="form-control" placeholder="Correo electrónico" value="@ViewData["Correo"]" disabled />
                                     </div>
                                 </div><!-- /col -->
 
                                 <div class="col-12 col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="Cedula" class="form-label mb-0">Cédula</label>
-                                        <input type="text" class="form-control" placeholder="00100000001" value="@Model.Cedula" disabled />
+                                        <input type="text" class="form-control" placeholder="00100000001" value="@ViewData["Cedula"]" disabled />
                                     </div>
                                 </div><!-- /col -->
 
                                 <div class="col-12 col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="Celular" class="form-label mb-0">Celular / Whatsapp</label>
-                                        <input type="text" class="form-control" placeholder="WhatsApp" value="@Model.Celular" disabled />
+                                        <input type="text" class="form-control" placeholder="WhatsApp" value="@ViewData["Celular"]" disabled />
                                     </div>
                                 </div><!-- /col -->
 
-                                <div class="col-12">
-                                    <div class="form-group mb-2">
-                                        <label for="Direccion" class="form-label mb-0">Dirección</label>
-                                        <input type="text" class="form-control" placeholder="Av. #1, Sto. Dgo., RD" value="@Model.Direccion" disabled />
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="Clave" class="form-label mb-0">Nueva Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="Clave" required />
+                                        @Html.ValidationMessageFor(m => m.Clave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div><!-- /col -->
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="RepetirClave" class="form-label mb-0">Repetir Clave</label>
+                                        <input type="password" class="form-control" placeholder="• • • •" asp-for="RepetirClave" required />
+                                        @Html.ValidationMessageFor(m => m.RepetirClave, "", new { @class = "text-danger" })
                                     </div>
                                 </div><!-- /col -->
                             </div><!-- /row -->
                         </div><!-- /body -->
 
+                        <input type="hidden" name="ID" value="@ViewData["ID"]" />
+                        <input type="hidden" name="Correo" value="@ViewData["Correo"]" />
+
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-4 col-xxl-3">
-                                    <a asp-controller="SuperAdmin" asp-action="Lista" class="btn btn-secondary w-100"
+                                <div class="col-4 offset-3 col-md-3 offset-md-5">
+                                    <a asp-controller="Cobrador" asp-action="Lista" class="btn btn-secondary w-100"
                                        data-bs-dismiss="modal">Atrás</a>
+                                </div>
+                                <div class="col-5 col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100">Cambiar clave</button>
                                 </div>
                             </div><!-- /row -->
                         </div>
@@ -90,4 +107,5 @@
         </div><!-- /row -->
     </div><!-- container -->
 </main>
+
 

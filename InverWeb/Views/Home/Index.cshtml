@@ -2,14 +2,14 @@
 
 @{
     ViewData["Title"] = "Ingreso";
-    bool HayErrores = !string.IsNullOrEmpty(ViewData["Error"]?.ToString());
+    bool HayErrores = !string.IsNullOrEmpty(TempData["Error"]?.ToString());
 }
 
 @if (HayErrores)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <div><i class="fa fa-times-circle"></i></div>
-        <strong>@ViewData["Error"]</strong>
+        <strong>@TempData["Error"]</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
